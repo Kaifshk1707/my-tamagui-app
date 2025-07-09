@@ -355,7 +355,7 @@ export default function HomeScreen() {
           }}
         >
           <TouchableOpacity onPress={() => console.log('OKA')}>
-            <Text style={{ fontWeight: 'bold', color: '#000' }}>Oka (You)</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>Oka (You)</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -368,10 +368,12 @@ export default function HomeScreen() {
               marginTop: -20,
             }}
           >
-            <Text style={{ fontSize: 28, color: '#3ec3aa' }}>+</Text>
+            <Text style={{ fontSize: 28, color: '#3ec3aa' }}>
+              <Ionicons name="add" size={32} color="#3ec3aa" />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => console.log("Oka's")}>
-            <Text style={{ fontWeight: 'bold', color: '#000' }}>Oka’s</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>Oka’s</Text>
           </TouchableOpacity>
         </View>
       </View>
