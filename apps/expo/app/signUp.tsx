@@ -1,126 +1,81 @@
 // File: apps/expo/app/signup.tsx
 
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  ScrollView,
-} from 'react-native'
-import { useRouter, Stack } from 'expo-router'
+import { useRouter } from 'expo-router'
+import { Image } from 'react-native'
+import { YStack, Text, Input, Button, ScrollView } from 'tamagui'
 
 export default function SignupScreen() {
   const router = useRouter()
-  const { width } = Dimensions.get('window')
 
   return (
-    <>
-      <Stack.Screen options={{ headerShown: false }} />
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: '#3ec3aa',
-          padding: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Text style={{ fontSize: 22, color: '#000', textAlign: 'center', marginBottom: 4 }}>
-          Welcome to <Text style={{ fontWeight: 'bold' }}>okaBoka</Text>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+      <YStack f={1} bg="#3ec3aa" p="$4" jc="center" ai="center" space>
+        <Text fontSize={22} color="$black" textAlign="center">
+          Welcome to <Text fontWeight="bold">okaBoka</Text>
         </Text>
 
-        <Text style={{ fontSize: 13, color: '#333', marginBottom: 20, textAlign: 'center' }}>
+        <Text fontSize={13} color="#333" textAlign="center">
           Connect with emotionally similar people
         </Text>
 
         <Image
-          source={require('./../assets/icon.png')} // Ensure splash.png exists
+          source={require('../assets/icon.png')}
           style={{
-            width: width * 0.4,
-            height: width * 0.4,
-            marginVertical: 20,
+            width: 140,
+            height: 140,
             resizeMode: 'contain',
+            marginVertical: 20,
           }}
         />
 
-        <Text
-          style={{
-            textAlign: 'center',
-            fontSize: 15,
-            marginBottom: 30,
-            fontWeight: '500',
-            color: '#222',
-          }}
-        >
-          Let’s start with your number your world begins here.
+        <Text fontSize={15} textAlign="center" fontWeight="500" color="#222" mb="$6">
+          Let’s start with your number, your world begins here.
         </Text>
 
-        <View style={{ width: '100%' }}>
-          <Text
-            style={{
-              fontWeight: '600',
-              marginBottom: 5,
-              color: '#000',
-            }}
-          >
+        <YStack width="100%" space>
+          <Text fontWeight="600" color="$black">
             Phone Number
           </Text>
-          <TextInput
+
+          <Input
             placeholder="Enter your number"
             placeholderTextColor="#999"
             keyboardType="phone-pad"
-            style={{
-              width: '100%',
-              backgroundColor: '#fff',
-              borderRadius: 10,
-              paddingHorizontal: 15,
-              paddingVertical: 12,
-              fontSize: 16,
-              marginBottom: 15,
-            }}
+            fontSize={16}
+            bg="$background"
+            borderRadius={10}
+            px="$4"
+            py="$3"
+            mb="$4"
           />
-        </View>
+        </YStack>
 
-        <Text style={{ marginVertical: 10, fontSize: 14, color: '#000' }}>or</Text>
+        <Text my="$2" fontSize={14} color="$black">
+          or
+        </Text>
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#fff',
-            borderRadius: 10,
-            paddingVertical: 12,
-            paddingHorizontal: 15,
-            width: '100%',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}
-        >
-          <Text style={{ color: '#000', fontSize: 15, fontWeight: '500' }}>
+        <Button bg="$background" borderRadius={10} py="$3" w="100%" onPress={() => {}}>
+          <Text color="#000" fontSize={15} fontWeight="500">
             Continue With Whatsapp
           </Text>
-        </TouchableOpacity>
+        </Button>
 
-        <TouchableOpacity
+        <Button
+          bg="#1e1e1e"
+          borderRadius={10}
+          py="$3.5"
+          w="100%"
           onPress={() => router.push('/verification')}
-          style={{
-            backgroundColor: '#1e1e1e',
-            borderRadius: 10,
-            paddingVertical: 14,
-            paddingHorizontal: 15,
-            width: '100%',
-            alignItems: 'center',
-            marginBottom: 10,
-          }}
         >
-          <Text style={{ color: '#fff', fontSize: 15, fontWeight: 'bold' }}>Send Me The Code</Text>
-        </TouchableOpacity>
+          <Text color="#fff" fontSize={15} fontWeight="bold">
+            Send Me The Code
+          </Text>
+        </Button>
 
-        <Text style={{ fontSize: 12, color: '#000', marginTop: 5 }}>
+        <Text fontSize={12} color="$black" mt="$2">
           We’ll never share your number
         </Text>
-      </ScrollView>
-    </>
+      </YStack>
+    </ScrollView>
   )
 }

@@ -1,6 +1,10 @@
-// File: apps/expo/app/_layout.tsx
-import { Stack } from 'expo-router'
+import { Stack, TamaguiProvider } from 'tamagui'
+import config from '@my/config/src/tamagui.config'
 
 export default function Layout() {
-  return <Stack />
+  return (
+    <TamaguiProvider config={config}>
+      <Stack />
+    </TamaguiProvider>
+  )
 }

@@ -1,6 +1,8 @@
+// File: apps/expo/app/index.tsx
 import { useEffect } from 'react'
-import { View, Image, ActivityIndicator, Text } from 'react-native'
-import { useRouter, Stack } from 'expo-router'
+import { useRouter } from 'expo-router'
+import { Image } from 'react-native' // ❗ still using this for static image
+import { View, Spinner } from 'tamagui'
 
 export default function SplashScreen() {
   const router = useRouter()
@@ -14,22 +16,12 @@ export default function SplashScreen() {
   }, [])
 
   return (
-    <>
-      {/* Header config */}
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
+    <View f={1} jc="center" ai="center" bg="$background">
+      <Image
+        source={require('../assets/splash.png')}
+        style={{ width: '100%', height: '110%', resizeMode: 'contain' }}
       />
-
-      <View
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}
-      >
-        <Image
-          source={require('./../assets/splash.png')} // ✅ path to your image
-          style={{ width: '100%', height: '110%', resizeMode: 'contain' }}
-        />
-      </View>
-    </>
+      <Spinner size="large" color="$gray10" />
+    </View>
   )
 }

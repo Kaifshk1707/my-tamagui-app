@@ -1,101 +1,65 @@
-// File: apps/expo/app/signup.tsx
+// File: apps/expo/app/profileScreen.tsx
 
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  ScrollView,
-} from 'react-native'
 import { useRouter, Stack } from 'expo-router'
+import { useWindowDimensions, Image } from 'react-native'
+import { YStack, Text, Input, Button, ScrollView } from 'tamagui'
 
-export default function profileScreen() {
+export default function ProfileScreen() {
   const router = useRouter()
-  const { width } = Dimensions.get('window')
+  const { width } = useWindowDimensions()
 
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: '#3ec3aa',
-          padding: 20,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Image
-          source={require('./../assets/personImage.jpeg')} // Ensure splash.png exists
-          style={{
-            width: width * 0.3,
-            height: width * 0.3,
-            marginVertical: 20,
-            resizeMode: 'cover',
-            borderRadius: 500,
-          }}
-        />
 
-        <Text
-          style={{
-            textAlign: 'center',
-            fontSize: 22,
-            marginBottom: 30,
-            fontWeight: '500',
-            color: '#222',
-          }}
-        >
-          What should we call you?
-        </Text>
-
-        <View style={{ width: '100%' }}>
-          <Text
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+        <YStack f={1} bg="#3ec3aa" p="$4" jc="center" ai="center" space>
+          <Image
+            source={require('../assets/personImage.jpeg')}
             style={{
-              fontWeight: '600',
-              marginBottom: 5,
-              color: '#000',
-            }}
-          >
-            Full Name
-          </Text>
-          <TextInput
-            placeholder="Your Name"
-            placeholderTextColor="#999"
-            keyboardType="phone-pad"
-            style={{
-              width: '100%',
-              backgroundColor: '#fff',
-              borderRadius: 10,
-              paddingHorizontal: 15,
-              paddingVertical: 12,
-              fontSize: 16,
-              marginBottom: 15,
+              width: width * 0.3,
+              height: width * 0.3,
+              resizeMode: 'cover',
+              borderRadius: 500,
+              marginVertical: 20,
             }}
           />
-        </View>
 
-        <TouchableOpacity
-          onPress={() => router.push('/aboutScreen')}
-          style={{
-            backgroundColor: '#1e1e1e',
-            borderRadius: 10,
-            paddingVertical: 14,
-            paddingHorizontal: 15,
-            width: '100%',
-            alignItems: 'center',
-            marginBottom: 10,
-          }}
-        >
-          <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
-            Lets Get To Know You
+          <Text fontSize={22} color="#222" textAlign="center" mb="$6" fontWeight="500">
+            What should we call you?
           </Text>
-        </TouchableOpacity>
-        <Text style={{ fontSize: 16, color: '#000', marginTop: 5 }}>
-          Your safety is our priority
-        </Text>
+
+          <YStack width="100%" mb="$4">
+            <Text fontWeight="600" mb="$2">
+              Full Name
+            </Text>
+            <Input
+              placeholder="Your Name"
+              placeholderTextColor="#999"
+              fontSize={16}
+              bg="$background"
+              borderRadius={10}
+              px="$4"
+              py="$3"
+            />
+          </YStack>
+
+          <Button
+            w="100%"
+            bg="#1e1e1e"
+            borderRadius={10}
+            py="$3.5"
+            onPress={() => router.push('/aboutScreen')}
+          >
+            <Text color="#fff" fontSize={16} fontWeight="bold">
+              Let's Get To Know You
+            </Text>
+          </Button>
+
+          <Text mt="$3" fontSize={14} color="$black">
+            Your safety is our priority
+          </Text>
+        </YStack>
       </ScrollView>
     </>
   )

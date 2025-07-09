@@ -1,15 +1,19 @@
-import React from 'react'
-import { View, Text, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
+// File: apps/expo/app/homeScreen.tsx
+
 import { Stack } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { YStack, XStack, Text, ScrollView, Button } from 'tamagui'
+import { Image, Dimensions, TouchableOpacity } from 'react-native'
 
 const screenWidth = Dimensions.get('window').width
 
 const EmotionItem = ({ emoji, label }: { emoji: string; label: string }) => (
-  <View style={{ alignItems: 'center' }}>
-    <Text style={{ fontSize: 30 }}>{emoji}</Text>
-    <Text style={{ fontSize: 14, color: '#000', fontWeight: '600' }}>{label}</Text>
-  </View>
+  <YStack ai="center" space="$1">
+    <Text fontSize={30}>{emoji}</Text>
+    <Text fontSize={14} fontWeight="600" color="#000">
+      {label}
+    </Text>
+  </YStack>
 )
 
 const FeedItem = ({
@@ -27,30 +31,28 @@ const FeedItem = ({
   images: any[]
   extraText: string
 }) => (
-  <View
-    style={{
-      margin: 10,
-      padding: 10,
-      backgroundColor: '#fff',
-      borderRadius: 12,
-      elevation: 2,
-    }}
-  >
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-      <View>
-        <Text style={{ fontWeight: '600', marginBottom: 2 }}>{date}</Text>
-        <Text style={{ fontSize: 12, color: '#444' }}>{location}</Text>
-      </View>
-      <View style={{ alignItems: 'center', right: '10%' }}>
-        <Text style={{ fontSize: 10 }}>{emoji}</Text>
-        <Text style={{ fontSize: 10 }}>feeling of the day</Text>
-      </View>
+  <YStack bg="$background" m="$3" p="$3" br={12} elevation="$2" space>
+    <XStack jc="space-between" mb="$2">
+      <YStack>
+        <Text fontWeight="600">{date}</Text>
+        <Text fontSize={12} color="#444">
+          {location}
+        </Text>
+      </YStack>
+
+      <YStack ai="center" mr="$4">
+        <Text fontSize={10}>{emoji}</Text>
+        <Text fontSize={10}>feeling of the day</Text>
+      </YStack>
+
       <Ionicons name="ellipsis-vertical" size={20} color="black" />
-    </View>
+    </XStack>
 
-    <Text style={{ fontSize: 13, marginBottom: 6, color: '#444' }}>{description}</Text>
+    <Text fontSize={13} color="#444">
+      {description}
+    </Text>
 
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
+    <XStack flexWrap="wrap" gap="$2">
       {images.map((img, i) => (
         <Image
           key={i}
@@ -59,109 +61,88 @@ const FeedItem = ({
             width: (screenWidth - 60) / 3,
             height: 80,
             borderRadius: 6,
+            marginTop: 6,
           }}
         />
       ))}
-    </View>
+    </XStack>
 
     <TouchableOpacity>
-      <Text
-        style={{
-          padding: 10,
-          fontSize: 16,
-          marginTop: 6,
-          color: '#666',
-          alignSelf: 'center',
-        }}
-      >
+      <Text textAlign="center" fontSize={15} color="#666" mt="$2">
         {extraText}
       </Text>
     </TouchableOpacity>
-  </View>
+  </YStack>
 )
 
 export default function HomeScreen() {
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <View style={{ flex: 1, backgroundColor: '#3ec3aa' }}>
-        {/* Header */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: 16,
-            marginTop: 30,
-          }}
-        >
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image
-              source={require('./../assets/icon.png')}
-              style={{ width: 36, height: 36, marginRight: 8 }}
-            />
-            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>OkaBoka</Text>
-          </View>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      <YStack f={1} bg="#3ec3aa">
+        {/* Header */}
+        <XStack jc="space-between" ai="center" px="$4" mt="$6">
+          <XStack ai="center" space="$2">
+            <Image source={require('./../assets/icon.png')} style={{ width: 36, height: 36 }} />
+            <Text fontSize={18} fontWeight="bold" color="#000">
+              OkaBoka
+            </Text>
+          </XStack>
+
+          <XStack ai="center" space="$3">
             <Ionicons name="notifications" size={28} color="gold" />
             <Image
               source={require('./../assets/personImage.jpeg')}
               style={{ width: 38, height: 38, borderRadius: 15 }}
             />
-          </View>
-        </View>
+          </XStack>
+        </XStack>
 
-        {/* Feeling Header */}
-        <Text style={{ fontSize: 16, textAlign: 'center', color: '#000', fontWeight: '600' }}>
+        {/* Feeling */}
+        <Text mt="$3" fontSize={16} fontWeight="600" textAlign="center" color="#000">
           How I’m Feeling Right Now
         </Text>
 
         {/* Feeling Selector */}
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            marginVertical: 10,
-            paddingHorizontal: 20,
-          }}
-        >
+        <XStack jc="space-around" ai="center" px="$4" mt="$2">
           <TouchableOpacity>
             <Ionicons name="arrow-back" size={28} color="black" />
           </TouchableOpacity>
 
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 30 }}>😢</Text>
-            <Text style={{ fontSize: 16, color: '#000', fontWeight: '600' }}>Sad</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <YStack ai="center">
+            <Text fontSize={30}>😢</Text>
+            <Text fontSize={16} color="#000" fontWeight="600">
+              Sad
+            </Text>
+            <XStack ai="center">
               <Ionicons name="people" size={20} color="black" />
-              <Text style={{ fontSize: 16, marginLeft: 4 }}>1.5k</Text>
-            </View>
-          </View>
+              <Text ml="$2" fontSize={16}>
+                1.5k
+              </Text>
+            </XStack>
+          </YStack>
 
           <TouchableOpacity>
             <Ionicons name="arrow-forward" size={28} color="black" />
           </TouchableOpacity>
-        </View>
+        </XStack>
 
-        {/* Emotions List */}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            marginBottom: 10,
-            paddingHorizontal: 20,
-          }}
-        >
+        {/* Emotion Icons */}
+        <XStack jc="space-around" px="$4" mt="$4" mb="$3">
           <EmotionItem emoji="😊" label="Happy" />
           <EmotionItem emoji="😘" label="Romantic" />
           <EmotionItem emoji="😐" label="Neutral" />
           <EmotionItem emoji="🤩" label="Excited" />
-        </View>
+        </XStack>
 
         {/* Feed */}
-        <ScrollView contentContainerStyle={{ backgroundColor: '#f5f5f5', paddingBottom: 90 }}>
+        <ScrollView
+          contentContainerStyle={{
+            backgroundColor: '#f5f5f5',
+            paddingBottom: 90,
+          }}
+        >
           <FeedItem
             date="July 07, 2025"
             location="📍 Metro Manila, Philippines"
@@ -196,22 +177,20 @@ export default function HomeScreen() {
         </ScrollView>
 
         {/* Bottom Tab */}
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: '100%',
-            height: 60,
-            backgroundColor: '#3ec3aa',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            borderTopLeftRadius: 16,
-            borderTopRightRadius: 16,
-          }}
+        <XStack
+          position="absolute"
+          bottom={0}
+          w="100%"
+          h={60}
+          bg="#3ec3aa"
+          jc="space-around"
+          ai="center"
+          brT="$4"
         >
-          <TouchableOpacity onPress={() => console.log('OKA')}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>Oka (You)</Text>
+          <TouchableOpacity>
+            <Text fontSize={18} fontWeight="bold" color="#000">
+              Oka (You)
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -228,11 +207,13 @@ export default function HomeScreen() {
             <Ionicons name="add" size={32} color="#3ec3aa" />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => console.log("Oka's")}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#000' }}>Oka’s</Text>
+          <TouchableOpacity>
+            <Text fontSize={18} fontWeight="bold" color="#000">
+              Oka’s
+            </Text>
           </TouchableOpacity>
-        </View>
-      </View>
+        </XStack>
+      </YStack>
     </>
   )
 }

@@ -1,13 +1,13 @@
-import { defaultConfig } from '@tamagui/config/v4'
+// packages/config/src/tamagui.config.ts
 import { createTamagui } from 'tamagui'
-import { bodyFont, headingFont } from './fonts'
-import { animations } from './animations'
+import { config } from '@tamagui/config'
 
-export const config = createTamagui({
-  ...defaultConfig,
-  animations,
-  fonts: {
-    body: bodyFont,
-    heading: headingFont,
-  },
-})
+const tamaguiConfig = createTamagui(config)
+
+export type Conf = typeof tamaguiConfig
+
+declare module 'tamagui' {
+  interface TamaguiCustomConfig extends Conf {}
+}
+
+export default tamaguiConfig

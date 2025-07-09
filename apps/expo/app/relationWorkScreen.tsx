@@ -1,7 +1,10 @@
+// File: apps/expo/app/relationWork.tsx
+
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
-import { Stack, useRouter } from 'expo-router'
+import { useRouter, Stack } from 'expo-router'
 import { Ionicons } from '@expo/vector-icons'
+import { YStack, XStack, Text, Button, ScrollView, Separator } from 'tamagui'
+import { TouchableOpacity } from 'react-native'
 
 export default function RelationWorkScreen() {
   const router = useRouter()
@@ -14,152 +17,101 @@ export default function RelationWorkScreen() {
   const relationshipOptions = ['Single', 'In A Relationship', 'Prefer Not To Say']
   const occupationOptions = ['Student', 'Employee', 'Freelancer', 'Other']
 
+  const renderOptionGroup = (
+    label: string,
+    options: string[],
+    selected: string,
+    onSelect: (val: string) => void
+  ) => (
+    <>
+      <Text fontWeight="600" mb="$2">
+        {label}
+      </Text>
+      <XStack flexWrap="wrap" gap="$2" mb="$5">
+        {options.map((item) => (
+          <Button
+            key={item}
+            br={10}
+            size="$3"
+            bg={selected === item ? '$color' : '$background'}
+            onPress={() => onSelect(item)}
+            px="$4"
+            py="$2"
+          >
+            <Text color={selected === item ? '#fff' : '#000'} fontWeight="500">
+              {item}
+            </Text>
+          </Button>
+        ))}
+      </XStack>
+    </>
+  )
+
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: '#3ec3aa',
-          padding: 20,
-          paddingTop: 50,
-        }}
-      >
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={24} color="#000" />
-        </TouchableOpacity>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <YStack f={1} bg="#3ec3aa" p="$4" pt="$6">
+          {/* Back button */}
+          <TouchableOpacity onPress={() => router.back()}>
+            <Ionicons name="arrow-back" size={24} color="#000" />
+          </TouchableOpacity>
 
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 20, marginBottom: 25 }}>
-          Let us understand who you're{'\n'}looking for and where you're at.
-        </Text>
-
-        {/* Interested In */}
-        <Text style={{ fontWeight: '600', marginBottom: 4 }}>
-          Interested In{' '}
-          <Text style={{ fontWeight: 'normal', fontSize: 12 }}>
-            (Who’s energy do you connect with?)
+          <Text fontSize={18} fontWeight="bold" mt="$4" mb="$5">
+            Let us understand who you're{'\n'}looking for and where you're at.
           </Text>
-        </Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 }}>
-          {genderOptions.map((item) => (
-            <TouchableOpacity
-              key={item}
-              onPress={() => setInterest(item)}
-              style={{
-                backgroundColor: interest === item ? '#000' : '#fff',
-                borderRadius: 10,
-                paddingVertical: 12,
-                paddingHorizontal: 18,
-              }}
-            >
-              <Text
-                style={{
-                  color: interest === item ? '#fff' : '#000',
-                  fontSize: 15,
-                  fontWeight: '500',
-                }}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
 
-        {/* Relationship Status */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Relationship Status</Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 }}>
-          {relationshipOptions.map((item) => (
-            <TouchableOpacity
-              key={item}
-              onPress={() => setRelationship(item)}
-              style={{
-                backgroundColor: relationship === item ? '#000' : '#fff',
-                borderRadius: 10,
-                paddingVertical: 12,
-                paddingHorizontal: 18,
-              }}
-            >
-              <Text
-                style={{
-                  color: relationship === item ? '#fff' : '#000',
-                  fontSize: 15,
-                  fontWeight: '500',
-                }}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+          {/* Interested In */}
+          {renderOptionGroup(
+            'Interested In (Who’s energy do you connect with?)',
+            genderOptions,
+            interest,
+            setInterest
+          )}
 
-        {/* Are You */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Are You</Text>
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 40 }}>
-          {occupationOptions.map((item) => (
-            <TouchableOpacity
-              key={item}
-              onPress={() => setOccupation(item)}
-              style={{
-                backgroundColor: occupation === item ? '#000' : '#fff',
-                borderRadius: 10,
-                paddingVertical: 12,
-                paddingHorizontal: 18,
-              }}
-            >
-              <Text
-                style={{
-                  color: occupation === item ? '#fff' : '#000',
-                  fontSize: 15,
-                  fontWeight: '500',
-                }}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+          {/* Relationship Status */}
+          {renderOptionGroup(
+            'Relationship Status',
+            relationshipOptions,
+            relationship,
+            setRelationship
+          )}
 
-        {/* Continue Button */}
-        <TouchableOpacity
-          style={{
-            backgroundColor: '#1e1e1e',
-            borderRadius: 10,
-            paddingVertical: 14,
-            alignItems: 'center',
-            marginBottom: 10,
-          }}
-          onPress={() => {
-            // router.push('/next-screen')
-            console.log({ interest, relationship, occupation })
-          }}
-        >
-          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15 }}>Continue</Text>
-        </TouchableOpacity>
+          {/* Are You */}
+          {renderOptionGroup('Are You', occupationOptions, occupation, setOccupation)}
 
-        <Text
-          style={{
-            fontSize: 12,
-            textAlign: 'center',
-            marginBottom: 10,
-            color: '#000',
-          }}
-        >
-          Your very first vibe
-        </Text>
-
-        <TouchableOpacity>
-          <Text
-            style={{
-              textAlign: 'center',
-              color: '#000',
-              fontWeight: 'bold',
-              fontSize: 14,
-              textDecorationLine: 'underline',
+          {/* Continue Button */}
+          <Button
+            bg="#1e1e1e"
+            br={10}
+            py="$3.5"
+            onPress={() => {
+              console.log({ interest, relationship, occupation })
+              // router.push('/next-screen')
             }}
+            mb="$3"
           >
-            Skip For Now
+            <Text color="#fff" fontWeight="bold" fontSize={15}>
+              Continue
+            </Text>
+          </Button>
+
+          <Text fontSize={12} textAlign="center" color="$black" mb="$2">
+            Your very first vibe
           </Text>
-        </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text
+              textAlign="center"
+              fontSize={14}
+              fontWeight="bold"
+              textDecorationLine="underline"
+              color="#000"
+            >
+              Skip For Now
+            </Text>
+          </TouchableOpacity>
+        </YStack>
       </ScrollView>
     </>
   )

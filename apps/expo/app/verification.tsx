@@ -1,19 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react'
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-  ScrollView,
-} from 'react-native'
-import { Stack, useRouter } from 'expo-router'
+// File: apps/expo/app/verification.tsx
+
+import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'expo-router'
+import { Image } from 'react-native'
+import { YStack, Text, Input, Button, ScrollView, XStack } from 'tamagui'
 
 export default function VerificationScreen() {
   const router = useRouter()
   const [otp, setOtp] = useState(['', '', '', ''])
-  const inputsRef = useRef<TextInput[]>([])
+  const inputsRef = useRef<any[]>([])
   const [timer, setTimer] = useState(30)
 
   useEffect(() => {
@@ -36,101 +31,71 @@ export default function VerificationScreen() {
   const handleVerify = () => {
     const code = otp.join('')
     console.log('Verifying code:', code)
-    router.push('/profileScreen') // Navigate on success
+    router.push('/profileScreen')
   }
 
   return (
-    <>
-      <Stack.Screen options={{ headerShown: false }} />
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          backgroundColor: '#3ec3aa',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 20,
-        }}
-        keyboardShouldPersistTaps="handled"
-      >
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+      <YStack f={1} bg="#3ec3aa" p="$4" jc="center" ai="center" space>
         <Image
-          source={require('./../assets/icon.png')}
+          source={require('../assets/icon.png')}
           style={{
-            width: Dimensions.get('window').width * 0.4,
-            height: Dimensions.get('window').width * 0.4,
+            width: 140,
+            height: 140,
             resizeMode: 'contain',
             marginBottom: 30,
           }}
         />
 
-        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 6 }}>
+        <Text fontSize={20} fontWeight="bold" mb="$2">
           Verify your number
         </Text>
-        <Text style={{ fontSize: 14, color: '#333', marginBottom: 25 }}>
+        <Text fontSize={14} color="#333" mb="$4">
           We've sent a code to your phone
         </Text>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            width: '80%',
-            marginBottom: 25,
-          }}
-        >
+        <XStack space="$3" mb="$4">
           {otp.map((digit, index) => (
-            <TextInput
+            <Input
               key={index}
               value={digit}
               keyboardType="numeric"
               maxLength={1}
+              ref={(ref) => (inputsRef.current[index] = ref)}
               onChangeText={(text) => handleOtpChange(text, index)}
-              ref={(ref) => (inputsRef.current[index] = ref!)}
-              style={{
-                width: 55,
-                height: 55,
-                backgroundColor: '#fff',
-                borderRadius: 10,
-                textAlign: 'center',
-                fontSize: 22,
-                fontWeight: 'bold',
-              }}
+              textAlign="center"
+              fontSize={20}
+              fontWeight="bold"
+              w={55}
+              h={55}
+              br={10}
+              bg="$background"
             />
           ))}
-        </View>
+        </XStack>
 
-        <TouchableOpacity
-          onPress={handleVerify}
-          style={{
-            backgroundColor: '#1e1e1e',
-            borderRadius: 10,
-            paddingVertical: 14,
-            paddingHorizontal: 20,
-            width: '80%',
-            alignItems: 'center',
-            marginBottom: 20,
-          }}
-        >
-          <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Verify</Text>
-        </TouchableOpacity>
+        <Button bg="#1e1e1e" borderRadius={10} py="$3.5" w="80%" onPress={handleVerify}>
+          <Text color="#fff" fontSize={16} fontWeight="bold">
+            Verify
+          </Text>
+        </Button>
 
-        <Text style={{ fontSize: 13, color: '#000' }}>
+        <Text fontSize={13} color="$black" mt="$4">
           Didn’t receive code?{' '}
           <Text
-            style={{
-              color: '#000',
-              fontWeight: '600',
-              textDecorationLine: timer === 0 ? 'underline' : 'none',
-              opacity: timer === 0 ? 1 : 0.4,
-            }}
             onPress={() => timer === 0 && setTimer(30)}
+            textDecorationLine={timer === 0 ? 'underline' : 'none'}
+            opacity={timer === 0 ? 1 : 0.4}
+            fontWeight="600"
           >
             Resend
           </Text>
         </Text>
-        <Text style={{ fontSize: 12, marginTop: 4, color: '#000' }}>
+
+        <Text fontSize={12} mt="$1" color="$black">
           You can request a new code in {timer} seconds
         </Text>
-      </ScrollView>
-    </>
+      </YStack>
+    </ScrollView>
   )
 }

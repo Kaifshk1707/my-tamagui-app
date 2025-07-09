@@ -3,10 +3,12 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
-    "paths": {
-      "app/*": ["./packages/app/*"],
-      "@my/ui/*": ["./packages/ui/*"]
-    }
+   "paths": {
+  "app/*": ["./packages/app/*"],
+  "@my/ui/*": ["./packages/ui/*"],
+  "@my/config/*": ["./packages/config/src/*"]  // ✅ ADD THIS
+}
+
   },
   "extends": "./tsconfig.base",
   "exclude": [
