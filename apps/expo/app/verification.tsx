@@ -62,10 +62,10 @@ export default function VerificationScreen() {
           }}
         />
 
-        <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 6 }}>
+        <Text style={{ fontSize: 22, fontWeight: 'bold', marginBottom: 6 }}>
           Verify your number
         </Text>
-        <Text style={{ fontSize: 14, color: '#333', marginBottom: 25 }}>
+        <Text style={{ fontSize: 18, color: '#333', marginBottom: 25 }}>
           We've sent a code to your phone
         </Text>
 
@@ -110,10 +110,10 @@ export default function VerificationScreen() {
             marginBottom: 20,
           }}
         >
-          <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>Verify</Text>
+          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>Verify</Text>
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 13, color: '#000' }}>
+        <Text style={{ fontSize: 16, color: '#000' }}>
           Didn’t receive code?{' '}
           <Text
             style={{
@@ -127,7 +127,7 @@ export default function VerificationScreen() {
             Resend
           </Text>
         </Text>
-        <Text style={{ fontSize: 12, marginTop: 4, color: '#000' }}>
+        <Text style={{ fontSize: 15, marginTop: 4, color: '#000' }}>
           You can request a new code in {timer} seconds
         </Text>
       </ScrollView>

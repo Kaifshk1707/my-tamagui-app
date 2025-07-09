@@ -42,9 +42,9 @@ export default function profileScreen() {
         <Text
           style={{
             textAlign: 'center',
-            fontSize: 22,
+            fontSize: 23,
             marginBottom: 30,
-            fontWeight: '500',
+            fontWeight: '400',
             color: '#222',
           }}
         >
@@ -57,6 +57,7 @@ export default function profileScreen() {
               fontWeight: '600',
               marginBottom: 5,
               color: '#000',
+              fontSize: 18,
             }}
           >
             Full Name
@@ -89,11 +90,11 @@ export default function profileScreen() {
             marginBottom: 10,
           }}
         >
-          <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>
+          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
             Lets Get To Know You
           </Text>
         </TouchableOpacity>
-        <Text style={{ fontSize: 16, color: '#000', marginTop: 5 }}>
+        <Text style={{ fontSize: 18, color: '#000', marginTop: 5 }}>
           Your safety is our priority
         </Text>
       </ScrollView>

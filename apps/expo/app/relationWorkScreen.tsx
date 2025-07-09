@@ -29,14 +29,14 @@ export default function RelationWorkScreen() {
           <Ionicons name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 20, marginBottom: 25 }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 20, marginBottom: 25 }}>
           Let us understand who you're{'\n'}looking for and where you're at.
         </Text>
 
         {/* Interested In */}
-        <Text style={{ fontWeight: '600', marginBottom: 4 }}>
+        <Text style={{ fontWeight: '600', marginBottom: 4, fontSize: 16 }}>
           Interested In{' '}
-          <Text style={{ fontWeight: 'normal', fontSize: 12 }}>
+          <Text style={{ fontWeight: 'normal', fontSize: 14 }}>
             (Who’s energy do you connect with?)
           </Text>
         </Text>
@@ -66,7 +66,9 @@ export default function RelationWorkScreen() {
         </View>
 
         {/* Relationship Status */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Relationship Status</Text>
+        <Text style={{ fontWeight: '600', marginBottom: 6, fontSize: 16 }}>
+          Relationship Status
+        </Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 20 }}>
           {relationshipOptions.map((item) => (
             <TouchableOpacity
@@ -93,7 +95,7 @@ export default function RelationWorkScreen() {
         </View>
 
         {/* Are You */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Are You</Text>
+        <Text style={{ fontWeight: '600', marginBottom: 6, fontSize: 16 }}>Are You</Text>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 40 }}>
           {occupationOptions.map((item) => (
             <TouchableOpacity
@@ -109,7 +111,7 @@ export default function RelationWorkScreen() {
               <Text
                 style={{
                   color: occupation === item ? '#fff' : '#000',
-                  fontSize: 15,
+                  fontSize: 16,
                   fontWeight: '500',
                 }}
               >
@@ -129,16 +131,16 @@ export default function RelationWorkScreen() {
             marginBottom: 10,
           }}
           onPress={() => {
-            // router.push('/next-screen')
+            router.push('/homeScreen')
             console.log({ interest, relationship, occupation })
           }}
         >
-          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15 }}>Continue</Text>
+          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
         </TouchableOpacity>
 
         <Text
           style={{
-            fontSize: 12,
+            fontSize: 14,
             textAlign: 'center',
             marginBottom: 10,
             color: '#000',
@@ -153,7 +155,7 @@ export default function RelationWorkScreen() {
               textAlign: 'center',
               color: '#000',
               fontWeight: 'bold',
-              fontSize: 14,
+              fontSize: 18,
               textDecorationLine: 'underline',
             }}
           >

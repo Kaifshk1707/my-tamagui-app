@@ -29,12 +29,12 @@ export default function AboutScreen() {
           <Ionicons name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
 
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 20, marginBottom: 25 }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 20, marginBottom: 25 }}>
           A little about you so we match better
         </Text>
 
         {/* Date of Birth */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Date of Birth</Text>
+        <Text style={{ fontWeight: '600', marginBottom: 6, fontSize: 16 }}>Date of Birth</Text>
         <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
           <TextInput
             placeholder="DD"
@@ -87,7 +87,7 @@ export default function AboutScreen() {
         </View>
 
         {/* Gender */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Gender</Text>
+        <Text style={{ fontWeight: '600', marginBottom: 6, fontSize: 16 }}>Gender</Text>
         <View style={{ flexDirection: 'row', gap: 10, marginBottom: 20 }}>
           {['Male', 'Female', 'Other'].map((g) => (
             <TouchableOpacity
@@ -114,7 +114,9 @@ export default function AboutScreen() {
         </View>
 
         {/* Location */}
-        <Text style={{ fontWeight: '600', marginBottom: 6 }}>Location (City, Country)</Text>
+        <Text style={{ fontWeight: '600', marginBottom: 6, fontSize: 16 }}>
+          Location (City, Country)
+        </Text>
         <TextInput
           placeholder="Enter your location"
           value={location}
@@ -133,7 +135,6 @@ export default function AboutScreen() {
         <TouchableOpacity
           onPress={() => {
             setUseCurrentLocation(!useCurrentLocation)
-            // Optionally trigger location permission here
           }}
           style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 50 }}
         >
@@ -143,11 +144,12 @@ export default function AboutScreen() {
             color={useCurrentLocation ? '#000' : '#666'}
             style={{ marginRight: 6 }}
           />
-          <Text style={{ color: '#000' }}>Use current location</Text>
+          <Text style={{ color: '#000', fontSize: 16 }}>Use current location</Text>
         </TouchableOpacity>
 
         {/* Continue Button */}
         <TouchableOpacity
+          onPress={() => router.push('/relationWorkScreen')}
           style={{
             backgroundColor: '#1e1e1e',
             borderRadius: 10,
@@ -156,10 +158,10 @@ export default function AboutScreen() {
             marginBottom: 10,
           }}
         >
-          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 15 }}>Continue</Text>
+          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 20 }}>Continue</Text>
         </TouchableOpacity>
 
-        <Text style={{ textAlign: 'center', fontSize: 12, color: '#000' }}>
+        <Text style={{ textAlign: 'center', fontSize: 18, color: '#000' }}>
           Who are you open to connecting with?
         </Text>
       </ScrollView>

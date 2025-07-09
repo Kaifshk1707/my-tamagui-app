@@ -49,13 +49,13 @@ export default function SignupScreen() {
         <Text
           style={{
             textAlign: 'center',
-            fontSize: 15,
+            fontSize: 17,
             marginBottom: 30,
             fontWeight: '500',
             color: '#222',
           }}
         >
-          Let’s start with your number your world begins here.
+          Let’s start with your number your world {'\n'} begins here.
         </Text>
 
         <View style={{ width: '100%' }}>
@@ -64,6 +64,7 @@ export default function SignupScreen() {
               fontWeight: '600',
               marginBottom: 5,
               color: '#000',
+              fontSize: 16,
             }}
           >
             Phone Number
@@ -84,7 +85,7 @@ export default function SignupScreen() {
           />
         </View>
 
-        <Text style={{ marginVertical: 10, fontSize: 14, color: '#000' }}>or</Text>
+        <Text style={{ marginVertical: 10, fontSize: 18, color: '#000' }}>or</Text>
 
         <TouchableOpacity
           style={{
